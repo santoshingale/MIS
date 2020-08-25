@@ -196,3 +196,29 @@ temporary_MIS.technology,
 temporary_MIS.files_changed from temporary_MIS
 INNER JOIN Fellowship_Candidate
 ON Fellowship_Candidate.Email_Id = temporary_MIS.user_name);
+
+
+SELECT Fellowship_Candidate.id, Fellowship_Candidate.First_Name, Fellowship_Candidate.Last_Name FROM Fellowship_Candidate
+INNER JOIN user_engagement_MIS
+ON Fellowship_Candidate.id = user_engagement_MIS.candidate_id;
+
+SELECT * FROM Fellowship_Candidate
+INNER JOIN user_engagement_MIS
+ON Fellowship_Candidate.id = user_engagement_MIS.candidate_id
+where date_format(user_engagement_MIS.Date_Time, '%H:%i:%s') > '08:30:00';
+
+SELECT Fellowship_Candidate.id, Fellowship_Candidate.First_Name, Fellowship_Candidate.Last_Name FROM Fellowship_Candidate
+INNER JOIN user_engagement_MIS
+ON Fellowship_Candidate.id = user_engagement_MIS.candidate_id
+where user_engagement_MIS.Date_Time > DATE_ADD("2019-11-17", INTERVAL '08:30' HOUR_MINUTE);
+
+
+SELECT * FROM Fellowship_Candidate
+INNER JOIN user_engagement_MIS
+ON Fellowship_Candidate.id = user_engagement_MIS.candidate_id
+where date_format(user_engagement_MIS.Date_Time, '%H:%i:%s') < '08:30:00';
+
+explain SELECT Fellowship_Candidate.id, Fellowship_Candidate.First_Name, Fellowship_Candidate.Last_Name FROM Fellowship_Candidate
+INNER JOIN user_engagement_MIS
+ON Fellowship_Candidate.id = user_engagement_MIS.candidate_id
+where user_engagement_MIS.Date_Time < DATE_ADD("2019-11-17", INTERVAL '08:30' HOUR_MINUTE);
